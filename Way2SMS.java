@@ -47,12 +47,12 @@ public class Way2SMS {
         			initialize();
         			break;
         		}
-        		if(content == null) {
-        		System.out.println("Login Unsuccessful");
-        		loginFlag = false;
-        		}
+        		
+        	if(content == null) {
+        	System.out.println("Login Unsuccessful");
+        	loginFlag = false;
+        	}
       
-        
         	return cookie;
 	}
 	
