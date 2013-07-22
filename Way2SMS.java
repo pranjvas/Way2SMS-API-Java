@@ -17,43 +17,43 @@ public class Way2SMS {
 		user = URLEncoder.encode(user, "utf-8");
 		pass = URLEncoder.encode(pass, "utf-8");
 		hc.setDoOutput(true);
-        hc.setRequestProperty("User-Agent","Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5");
-        hc.setRequestProperty("Content-Length", String.valueOf(loginContent.length()));
-        hc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-        hc.setRequestProperty("Accept", "*/*");
-        hc.setRequestProperty("Referer", "http://o.way2sms.com/content/index.html");
-        hc.setRequestMethod("POST");
-        hc.setInstanceFollowRedirects(false);
+        	hc.setRequestProperty("User-Agent","Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5");
+        	hc.setRequestProperty("Content-Length", String.valueOf(loginContent.length()));
+        	hc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+        	hc.setRequestProperty("Accept", "*/*");
+        	hc.setRequestProperty("Referer", "http://o.way2sms.com/content/index.html");
+        	hc.setRequestMethod("POST");
+        	hc.setInstanceFollowRedirects(false);
         
-        PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(hc.getOutputStream()), true);
-        printWriter.print(loginContent);
-        printWriter.flush();
-        printWriter.close();
-        cookie = hc.getHeaderField("Set-Cookie");
+        	PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(hc.getOutputStream()), true);
+        	printWriter.print(loginContent);
+        	printWriter.flush();
+        	printWriter.close();
+       		cookie = hc.getHeaderField("Set-Cookie");
         
-        eckie = cookie.substring(cookie.indexOf('~')+1, cookie.indexOf(';'));
-//        System.out.println(cookie + "\n" + eckie);
+        	eckie = cookie.substring(cookie.indexOf('~')+1, cookie.indexOf(';'));
+//        	System.out.println(cookie + "\n" + eckie);
         
-        URL u1 = new URL("http://o.way2sms.com/Main.action?id=" + eckie);
-        HttpURLConnection hc1 = (HttpURLConnection) u1.openConnection();
-        hc1.setRequestProperty("Cookie", cookie);
+        	URL u1 = new URL("http://o.way2sms.com/Main.action?id=" + eckie);
+        	HttpURLConnection hc1 = (HttpURLConnection) u1.openConnection();
+        	hc1.setRequestProperty("Cookie", cookie);
         
-        BufferedReader br = new BufferedReader(new InputStreamReader(hc1.getInputStream()));
-        String content="";
-        while((content=br.readLine())!=null)
-        	if(content.contains(user)) {
-        		System.out.println("Login Successful");
-        		loginFlag = true;
-        		initialize();
-        		break;
+        	BufferedReader br = new BufferedReader(new InputStreamReader(hc1.getInputStream()));
+        	String content="";
+        	while((content=br.readLine())!=null)
+        		if(content.contains(user)) {
+        			System.out.println("Login Successful");
+        			loginFlag = true;
+        			initialize();
+        			break;
+        		}
+        		if(content == null) {
+        		System.out.println("Login Unsuccessful");
+        		loginFlag = false;
         	}
-        if(content == null) {
-        	System.out.println("Login Unsuccessful");
-        	loginFlag = false;
-        }
       
         
-        return cookie;
+        	return cookie;
 	}
 	
 	public void initialize() throws Exception {
