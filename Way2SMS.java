@@ -50,7 +50,7 @@ public class Way2SMS {
         		if(content == null) {
         		System.out.println("Login Unsuccessful");
         		loginFlag = false;
-        	}
+        		}
       
         
         	return cookie;
